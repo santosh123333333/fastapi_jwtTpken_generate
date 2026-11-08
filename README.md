@@ -97,10 +97,8 @@ Once the application is running, open:
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | Health Check |
 | POST | `/auth/register` | Register New User |
 | POST | `/auth/login` | Login & Generate JWT |
-| GET | `/users/me` | Get Current Authenticated User |
 
 ## Authentication Workflow
 
