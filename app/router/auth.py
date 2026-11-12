@@ -1,14 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from jose import jwt
 
+
 from app.db.database import get_db
 from app.schemas import user
 from app.schemas.user import UserResponse, Usercreate,Userlogin
 from sqlalchemy.orm import Session
 from app.model.user import User
-from app.security.security import cerate_access_token, hash_password, verify_password
+from app.security.security import cerate_access_token, hash_password, verify_password,get_current_user
 
 router=APIRouter()
+
 
 #creating user registration
 
@@ -90,6 +92,16 @@ def login(user:Userlogin,db:Session=Depends(get_db)):
     }
 
 
+
+
+@router.get("/profile")
+def profile(current_user:User=Depends(get_current_user)):
+  
+    return{
+       "id":current_user.id,
+       "email":current_user.email,
+       "Full_name":current_user.full_name
+    }
 
 
 
